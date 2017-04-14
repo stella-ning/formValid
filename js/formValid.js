@@ -34,8 +34,12 @@
             }
         },
         isMobile: function(value, errorMsg) {
-            //是否为手机号码和QQ号
-            if (/(1[\d]{10})|([1-9]\d{4,10})/.test(value)) {
+            // //是否为手机号码和QQ号
+            // if (!/(1[\d]{10})|([1-9]\d{4,10})/.test(value)) {
+            //     return errorMsg;
+            // }
+            // //是否为手机号码
+            if (!/(1[\d]{10})/.test(value)) {
                 return errorMsg;
             }
         },
