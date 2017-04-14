@@ -23,6 +23,9 @@ input[type=radio] {
 .form-box .radio {
   line-height: 35px;
 }
+.form-box .form-control {
+  background-color: #fff!important;
+}
 .form-box .form-control .radio-wrap {
   display: inline-block;
   position: relative;

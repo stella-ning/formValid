@@ -7,12 +7,14 @@
     <title>表单验证组件</title>
     <link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="plug-in/laydate/css/form_public.css" />
+    <link rel="stylesheet" href="plug-in/laydate/css/public.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/formValid.js"></script>
     <script src="js/Area.js"></script>
+    <script src="plug-in/laydate/js/laydate.js"></script>
     <script src="js/form.js"></script>
-
 </head>
 <body>
     <section class="form-box">
@@ -33,6 +35,7 @@
                     <input type="text" class="form-control required" placeholder="请输入您的姓名" data-valid="isNonEmpty"  date-tip = "请输入您的姓名" data-error="请输入您的姓名">
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="col-md-4 col-xs-12 control-label">性别：</label>
                 <div class="col-md-8 col-xs-12 " >
@@ -119,10 +122,21 @@
                 </div>
 
             </div>
+            <div class="form-group clearfix">
+                <label class="col-md-4 col-xs-12 control-label">起止时间：</label>
+                <div class="col-md-3 col-xs-6 " date-relative="#latestAccountDateTo" style="float:left;padding-left:18px">
+                    <input class="form-control laydate-icon required" id="start" type="text" name="start-time" data-valid="isNonEmpty" data-error="活动开始时间必选" readonly="true" >
+                </div>
+                <span class="fl" style="margin:0 15px;">~</span>
+                <div class="col-md-3 col-xs-6 " id="latestAccountDateTo" style="float:left;">
+                    <input class="form-control laydate-icon required" id="end" type="text" name="end-time" data-valid="isNonEmpty" data-error="活动结束时间必选" readonly="true">
+                </div>
+
+            </div>
             <div class="form-group">
                 <label class="col-md-4 col-xs-12 control-label">联系电话：</label>
                 <div class="col-md-8 col-xs-12">
-                    <input type="text" class="form-control required" placeholder="手机号码" data-valid="isNonEmpty" date-tip = "请输入您的手机号码" data-error="请输入您的手机号码">
+                    <input type="text" class="form-control required " placeholder="手机号码" data-valid="isNonEmpty" date-tip = "请输入您的手机号码" data-error="请输入您的手机号码">
                 </div>
             </div>
             <div class="form-group">
@@ -153,5 +167,35 @@
         //省市区选择
         _init_area();
     </script>
+    <script>
+        //日期范围限制
+        var start = {
+            elem: '#start',
+            format: 'YYYY-MM-DD',
+            min: laydate.now(), //设定最小日期为当前日期
+            max: '2099-06-16', //最大日期
+            istime: true,
+            istoday: false,
+            choose: function(datas){
+                 end.min = datas; //开始日选好后，重置结束日的最小日期
+                 end.start = datas //将结束日的初始值设定为开始日
+                 $('#start').trigger('blur');
+            }
+        };
+        var end = {
+            elem: '#end',
+            format: 'YYYY-MM-DD',
+            min: laydate.now(),
+            max: '2099-06-16',
+            istime: true,
+            istoday: false,
+            choose: function(datas){
+                start.max = datas; //结束日选好后，充值开始日的最大日期
+                $('#end').trigger('blur');
+            }
+        };
+        laydate(start);
+        laydate(end);
+        </script>
 </body>
 </html>
