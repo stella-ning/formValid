@@ -201,11 +201,17 @@ input[type=radio] {
     margin: 1vh auto;
     overflow: hidden;
   }
+  .form-box .formTime {
+    display: none;
+  }
   .form-box .form-control {
     box-sizing: border-box;
     width: 98%;
   }
   .form-box select.form-control {
     width: 32%;
+  }
+  .form-box .formLine {
+    display: none;
   }
 }
